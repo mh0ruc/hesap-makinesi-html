@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hesap Makinesi</title>
+    <style>
+      #div1 {
+        width: 275px;
+        height: 100px;
+        border: 5px solid;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 1000;
+        background-color: gray;
+      }
+
+      #div2 {
+        width: 275px;
+        height: 350px;
+        border: 5px solid;
+        background-color: gray;
+        
+      }
+
+      #numberInput {
+        width: 245px;
+        height: 40px;
+        border: 3px solid;
+        margin-left: 8px;
+        margin-top: 8px;
+        background-color:#C0C0C0;
+      }
+
+      .button {
+        width: 75px;
+        height: 50px;
+        margin: 5px;
+        margin-left: 8px;
+        background-color: #778899;
+        color:white;
+      }
+
+      .operator-button {
+        width: 34px;
+        height: 50px;
+        margin: 5px;
+        background-color: #778899;
+        color:white;
+      }
+
+      #equals-button {
+        width: 75px;
+        height: 50px;
+        margin: 5px;
+        margin-left: 8px;
+        background-color: #4caf50;
+        color: white;
+      }
+
+      #clear-button {
+        width: 75px;
+        height: 50px;
+        margin: 5px;
+        background-color: #f44336;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1">Hesap Makinesi</div>
+    <br />
+    <div id="div2">
+      <input id="numberInput" type="text" value="" />
+      <br />
+      <script>
+        function getNumber(i) {
+          var inputValue = document.getElementById("numberInput");
+          inputValue.value = inputValue.value + i;
+        }
+
+        function getOperators(operator) {
+          var inputValue = document.getElementById("numberInput");
+          inputValue.value = inputValue.value + operator;
+        }
+
+        function calculateResult() {
+          var inputValue = document.getElementById("numberInput");
+          try {
+            inputValue.value = eval(inputValue.value);
+          } catch (error) {
+            inputValue.value = "Hata";
+          }
+        }
+
+        function clearInput() {
+          var inputValue = document.getElementById("numberInput");
+          inputValue.value = "";
+        }
+
+        for (var i = 1; i <= 9; i++) {
+          document.write('<button class="button" onclick="getNumber(' + i + ')">' + i + "</button>");
+
+          if (i % 3 === 0) {
+            document.write("<br>");
+          }
+        }
+        i=0
+        document.write('<button class="button" onclick="getNumber(' + i + ')">' + i + "</button>");
+
+        var operators = ["+", "-", "*", "/", "."];
+        for (var i = 0; i < operators.length; i++) {
+          document.write(
+            '<button class="operator-button" onclick="getOperators(\'' +
+              operators[i] +
+              "')\">" +
+              operators[i] +
+              "</button>"
+          );
+        }
+
+        document.write('<button id="equals-button" onclick="calculateResult()">=</button>');
+
+        document.write('<button id="clear-button" onclick="clearInput()">C</button>');
+      </script>
+    </div>
+  </body>
+</html>
